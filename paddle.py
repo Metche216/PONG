@@ -10,6 +10,7 @@ class Paddle (Turtle):
         self.goto(x=xpos, y=0)
         self.penup()
         self.color('white')
+        self.score = 0
         
         
     def up(self):
