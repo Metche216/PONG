@@ -1,4 +1,4 @@
-from turtle import Screen
+from turtle import Screen, Turtle
 from paddle import Paddle
 from ball import Ball
 from scoreboard import Scoreboard
@@ -20,18 +20,25 @@ ball = Ball()
 
 score = Scoreboard()
 
+test = Turtle()
+test.color('white')
+test.penup()
+test.goto(x=320, y=300)
+test.pendown()
+test.goto(x=320, y=-300)
 
 screen.onkeypress(p2_paddle.up, "Up")
 screen.onkeypress(p2_paddle.down, "Down")
 screen.onkeypress(p1_paddle.up, "w")
 screen.onkeypress(p1_paddle.down, "s")
 
+
 # direction = "UR"
 
 game_on = True
 while game_on:
 
-    time.sleep(0.1)
+    time.sleep(ball.move_speed)
     screen.update()
     ball.move()
     
@@ -40,8 +47,9 @@ while game_on:
         ball.bounce_y()
     
     #DETECT COLLISION WITH RIGHT PADDLE
-    if ball.distance(p2_paddle) < 50 and ball.xcor() > 320  or ball.distance(p1_paddle) < 50 and ball.xcor() < -320:
+    if ball.x_move > 0 and ball.distance(p2_paddle) < 50 and ball.xcor() > 320  or ball.x_move < 0 and ball.distance(p1_paddle) < 50 and ball.xcor() < -320:
         ball.bounce_x()
+        
     
     #DETECT SCORE
     if ball.xcor() > 380:
